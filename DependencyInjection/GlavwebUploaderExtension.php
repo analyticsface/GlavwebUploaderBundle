@@ -41,6 +41,10 @@ class GlavwebUploaderExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
+        $this->addAnnotatedClassesToCompile([
+            'Glavweb\\UploaderBundle\\Controller\\'
+        ]);
+
         $container->setParameter('glavweb_uploader.config', $config);
     }
 
@@ -51,7 +55,7 @@ class GlavwebUploaderExtension extends Extension
     public function applyMappingsDefaults($config)
     {
         $defaults = $config['mappings_defaults'];
-        $mappings = $config['mappings'];
+        $mappings = &$config['mappings'];
 
         foreach ($mappings as &$contextConfig) {
 
